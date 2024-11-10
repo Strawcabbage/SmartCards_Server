@@ -4,28 +4,26 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 @Entity
-@Table(name="FLASHCARD")
 public class Flashcard {
 
     @Id
-    @Getter
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Getter
     @Setter
-    @Column(name="TERM")
     private String term;
 
-    @Getter
     @Setter
-    @Column(name="DEFINITION")
     private String definition;
 
-    @Getter
+    @Setter
+    private int set_num;
+
     @Setter
     @ManyToOne
-    @JoinColumn(name = "SET_ID") // Specifies the foreign key column in Flashcard table
     private Set set;
+
+
 }

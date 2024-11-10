@@ -1,12 +1,11 @@
 package smartcards.server.controllers;
 
+import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.*;
 import smartcards.server.Services.SetService;
-import smartcards.server.models.Flashcard;
 import smartcards.server.models.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -22,12 +21,11 @@ public class SetController {
     @GetMapping("/{id}")
     public Optional<Set> getSetById(@PathVariable("id") Integer id) {return setService.getSetById(id);}
 
+    @Transactional
     @PostMapping("/create")
     public Set createSet(@RequestBody Set set) {
-
-        if (!Objects.equals(set.getId(), this.setService.getSetById(set.getId()))) {
-            return this.setService.createSet(set);
-        } else { return null; }
+        System.out.println("Creating Set: " + set.getName());
+        return this.setService.createSet(set);
 
     }
 

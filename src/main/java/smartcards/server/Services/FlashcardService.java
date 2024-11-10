@@ -2,7 +2,6 @@ package smartcards.server.Services;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import smartcards.server.models.Set;
 import smartcards.server.repositories.FlashcardRepository;
 import org.springframework.stereotype.Service;
 import smartcards.server.models.Flashcard;
@@ -23,7 +22,7 @@ public class FlashcardService {
 
     public Optional<Flashcard> getFlashcardById(Integer id) {return this.flashcardRepository.findById(id);}
 
-    public List<Flashcard> getFlashcardBySet(@RequestBody Set set) {return this.flashcardRepository.findBySet(set);}
+    public List<Flashcard> getFlashcardBySetId(Integer set_id) {return this.flashcardRepository.findBySet_Id(set_id);}
 
     public Flashcard createFlashcard(@RequestBody Flashcard flashcard) {return this.flashcardRepository.save(flashcard);}
 
@@ -32,4 +31,5 @@ public class FlashcardService {
     public Flashcard updateSet(@RequestBody Flashcard flashcard) {return this.flashcardRepository.save(flashcard);}
 
 
+    public void saveAll(List<Flashcard> flashcards) {this.flashcardRepository.saveAll(flashcards);}
 }

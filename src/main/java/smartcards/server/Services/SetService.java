@@ -1,8 +1,7 @@
 package smartcards.server.Services;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
-import smartcards.server.models.Flashcard;
 import smartcards.server.models.Set;
 import smartcards.server.repositories.SetRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,7 @@ public class SetService {
 
     public Optional<Set> getSetById(Integer id) { return this.setRepository.findById(id);}
 
+    @Transactional
     public Set createSet(@RequestBody Set set) {return this.setRepository.save(set);}
 
     public void deleteSet(Integer id) {this.setRepository.deleteById(id);}

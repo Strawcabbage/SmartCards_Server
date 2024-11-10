@@ -1,5 +1,6 @@
 package smartcards.server.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import smartcards.server.Services.FlashcardService;
 import smartcards.server.Services.SetService;
@@ -7,6 +8,7 @@ import smartcards.server.models.Flashcard;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartcards.server.models.Set;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -23,16 +25,16 @@ public class FlashcardController {
     @GetMapping("/all")
     public Iterable<Flashcard> getAllFlashcards() {return flashcardService.getAllFlashcards();}
 
-    @GetMapping("/set")
-    public Iterable<Flashcard> getFlashcardBySet(@RequestBody Set set) {
+    @GetMapping("/set/{id}")
+    public Iterable<Flashcard> getFlashcardBySetId(@PathVariable("id") Integer id) {
 
-        Optional<Set> setOptional = this.setService.getSetById(set.getId());
+        Optional<Set> setOptional = this.setService.getSetById(id);
 
         if (setOptional.isEmpty()) {
             return null;
         }
 
-        return this.flashcardService.getFlashcardBySet(set);
+        return this.flashcardService.getFlashcardBySetId(id);
 
     }
 
@@ -43,6 +45,12 @@ public class FlashcardController {
             return this.flashcardService.createFlashcard(flashcard);
         } else { return null; }
 
+    }
+
+    @PostMapping("/batchCreate")
+    public ResponseEntity<?> batchCreateFlashcards(@RequestBody List<Flashcard> flashcards) {
+        this.flashcardService.saveAll(flashcards);
+        return ResponseEntity.ok("Flashcards created successfully");
     }
 
     @DeleteMapping("/delete/{id}")

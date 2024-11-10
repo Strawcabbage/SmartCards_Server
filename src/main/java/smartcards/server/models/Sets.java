@@ -7,18 +7,15 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Entity
-@Table(name="SETS")
-public class Set {
+public class Sets {
 
     @Id
-    @Getter
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Getter
     @Setter
-    @Column(name = "NAME")
     private String name;
     /*
     @Getter
@@ -26,7 +23,7 @@ public class Set {
     @Column(name = "USER_NAME")
     private String userName;
     */
-
+    @Setter
     @OneToMany(mappedBy = "set", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Flashcard> flashcards = new ArrayList<>();
 

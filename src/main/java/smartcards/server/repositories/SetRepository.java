@@ -1,5 +1,6 @@
 package smartcards.server.repositories;
 
+import smartcards.server.models.Flashcard;
 import smartcards.server.models.Set;
 import org.springframework.data.repository.CrudRepository;
 

@@ -26,6 +26,7 @@ public class Set {
     @Column(name = "USER_NAME")
     private String userName;
     */
+
     @OneToMany(mappedBy = "set", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Flashcard> flashcards = new ArrayList<>();
 

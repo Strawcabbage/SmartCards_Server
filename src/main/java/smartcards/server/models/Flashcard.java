@@ -23,6 +23,8 @@ public class Flashcard {
     @Column(name="DEFINITION")
     private String definition;
 
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "SET_ID") // Specifies the foreign key column in Flashcard table
     private Set set;
